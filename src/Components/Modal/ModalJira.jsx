@@ -67,6 +67,7 @@ const ModalJira = (props) => {
       type: "COMBINE_CHANGE_TASK",
       actionType: "CHANGE_TASK",
       payload: { name: name, value: value },
+      projectId: props.match.params.projectId,
     });
     //dispatch({ type: "CHANGE_TASK", payload: { name: name, value: value } });
   };
@@ -148,7 +149,7 @@ const ModalJira = (props) => {
       </div>
     );
   };
-  console.log("Comment", editCommentContent);
+  console.log("Comment", props.match.params);
   return (
     <div>
       <div>
@@ -220,7 +221,10 @@ const ModalJira = (props) => {
                     </select>
                   </span>
                 </div>
-                <div style={{ display: "flex" }} className="task-click">
+                <div
+                  style={{ display: "flex", alignItems: "center" }}
+                  className="task-click"
+                >
                   <div>
                     <i className="fab fa-telegram-plane" />
                     <span style={{ paddingRight: 20 }}>Give feedback</span>
@@ -229,10 +233,29 @@ const ModalJira = (props) => {
                     <i className="fa fa-link" />
                     <span style={{ paddingRight: 20 }}>Copy link</span>
                   </div>
-                  <i
-                    className="fa fa-trash-alt"
-                    style={{ cursor: "pointer" }}
-                  />
+                  <button
+                    type="button"
+                    className="btn close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                    onClick={() => {
+                      setTimeout(() => {
+                        dispatch({
+                          type: "DELETE_TASK_API",
+                          payload: {
+                            taskId: taskDetail.taskId,
+                            projectId: props.match.params.projectId,
+                          },
+                        });
+                      }, 100);
+                    }}
+                  >
+                    <i
+                      className="fa fa-trash-alt"
+                      style={{ cursor: "pointer" }}
+                    />
+                  </button>
+
                   <button
                     type="button"
                     className="close"
@@ -476,6 +499,7 @@ const ModalJira = (props) => {
                           onChange={(e) => {
                             handleChange(e);
                           }}
+                          value={taskDetail.statusId}
                         >
                           {statusList.map((item, index) => {
                             return (

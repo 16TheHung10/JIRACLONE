@@ -22,7 +22,11 @@ const HomeTemplate = (props) => {
               <Sidebar />
               <MenuJira />
               <Component {...routeProps} toast={toast} />
-              <ModalJira taskDetail={taskDetail} taskComment={taskComment} />
+              <ModalJira
+                {...routeProps}
+                taskDetail={taskDetail}
+                taskComment={taskComment}
+              />
             </div>
           </Fragment>
         );

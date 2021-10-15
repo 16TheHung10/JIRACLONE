@@ -12,6 +12,7 @@ const InfoMain = (props) => {
       );
     });
   };
+  console.log("detail", projectDetail);
   return (
     <>
       <h3>{projectDetail.projectName?.toUpperCase()}</h3>

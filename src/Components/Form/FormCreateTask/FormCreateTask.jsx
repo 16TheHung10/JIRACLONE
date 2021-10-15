@@ -20,7 +20,7 @@ const FormCreateTask = () => {
       originalEstimate: 0,
       timeTrackingSpent: 0,
       timeTrackingRemaining: 0,
-      projectId: 0,
+      projectId: "",
       typeId: 0,
       priorityId: 0,
     },
@@ -66,7 +66,7 @@ const FormCreateTask = () => {
     dispatch({ type: "GET_STATUS_LIST_API" });
     dispatch({ type: "SET_SUBMIT_CREATE_TASK", payload: formik.handleSubmit });
   }, []);
-  console.log("formik", formik);
+  console.log("selectAssignes", projectList);
   return (
     <div className="container">
       <form action="">

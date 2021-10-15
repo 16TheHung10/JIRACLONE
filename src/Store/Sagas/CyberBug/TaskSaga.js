@@ -1,4 +1,4 @@
-import { takeLatest, call, put, select } from "redux-saga/effects";
+import { takeLatest, call, put, select, delay } from "redux-saga/effects";
 import { TaskService } from "../../../Service/TaskService";
 
 function* getTaskComment({ payload }) {
@@ -31,7 +31,7 @@ export function* followUpdateTaskDetail() {
   yield takeLatest("UPDATE_TASK_DETAIL_API", updateTaskDetail);
 }
 
-function* handleChangePostApi({ actionType, payload }) {
+function* handleChangePostApi({ actionType, payload, projectId }) {
   //ogij action làm thay đỏi taskDetail modal
   switch (actionType) {
     case "ADD_TASK_COMMENT_API_COMP":
@@ -42,6 +42,7 @@ function* handleChangePostApi({ actionType, payload }) {
         type: "CHANGE_TASK_RE",
         payload: { name: name, value: value },
       });
+      yield put({ type: "GET_PROJECT_DETAIL_API", payload: projectId });
   }
   let { taskDetail } = yield select((state) => state.TaskReducer);
   let newListUserAsign = taskDetail.assigness?.map((item) => {
@@ -75,4 +76,20 @@ function* updateComment({ payload }) {
 }
 export function* followUpdateComment() {
   yield takeLatest("UPDATE_COMMENT_API", updateComment);
+}
+function* deleteTask({ payload }) {
+  try {
+    yield call(() => {
+      return TaskService.deleteTaskApi(payload.taskId);
+    });
+    yield put({ type: "GET_PROJECT_DETAIL_API", payload: payload.projectId });
+    yield delay(600);
+    yield alert("DELETE TASK SUCCESS");
+  } catch (err) {
+    console.log(err);
+  }
+  console.log("sga", payload);
+}
+export function* followDeleteTask() {
+  yield takeLatest("DELETE_TASK_API", deleteTask);
 }

@@ -56,7 +56,7 @@ const ContentMain = (props) => {
                     className="card"
                     style={{
                       width: "23.5%",
-                      height: "auto",
+                      height: "100%",
                       backgroundColor: "#f0f2f5",
                       fontWeight: "bold",
                       fontSize: "1.1rem",

@@ -26,5 +26,6 @@ export function* rootSaga() {
     TaskSaga.followUpdateTaskDetail(),
     TaskSaga.followHandleChangePostApi(),
     TaskSaga.followUpdateComment(),
+    TaskSaga.followDeleteTask(),
   ]);
 }

@@ -24,10 +24,15 @@ export const TaskService = {
       headers: { Authorization: `Bearer ${localStorage.getItem(TOKEN)}` },
     });
   },
-  updateCommentApi: ({ id, contentComment }) => {
+  updateTaskDetail: (payload) => {
+    return axios.post(`${DOMAIN}/Project/updateTask`, payload, {
+      headers: { Authorization: `Bearer ${localStorage.getItem(TOKEN)}` },
+    });
+  },
+  deleteTaskApi: (payload) => {
     return axios({
-      url: `${DOMAIN}/Comment/updateComment?id=${id}&contentComment=${contentComment}`,
-      method: "PUT",
+      url: `${DOMAIN}/Project/removeTask?taskId=${payload}`,
+      method: "delete",
       headers: { Authorization: `Bearer ${localStorage.getItem(TOKEN)}` },
     });
   },
