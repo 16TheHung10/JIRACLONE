@@ -1,0 +1,10 @@
+nhớ cài đặt middleware saga thì mới ăn saga được
+viết những action trong folder action
+Viết history ngay tại saga ( component thì dễ vì có thể thông qua props của route) ( npm i history (search gg "redirect in redux saga"))
+    Nhưng cách này sẽ bị lỗi với react-router-dom ver 5. nên để fix ta làm như sau
+    1. vào packet.json đổi phiên bản history thành 4.10
+    2. xóa file nodemodule và cài lại
+Parse từ tag ->text dùng react-html-parse
+Kỹ thuật debounce search
+Nếu mà dùng gọi api thông qua onChange thì sẽ rất tốn tài nguyên ram của server. nếu số lượng user cùng search cùng lúc lớn thì lượng api gửi đi rất là nhiều
+drag dungf thư viện beautiful dnd
